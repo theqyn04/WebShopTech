@@ -56,9 +56,8 @@
                                         <form action="CartURL" method="post" style="display: flex;">
                                             <input type="hidden" name="service" value="updateQuantity">
                                             <input type="hidden" name="pid" value="<%=phone.getPhone_id()%>">
-                                            <button type="submit" name="action" value="decrease">-</button>
+                                           
                                             <input type="number" name="quantity" value="<%=phone.getQuantity()%>" min="1" readonly>
-                                            <button type="submit" name="action" value="increase">+</button>
                                         </form>
                                     </div>
                                 </td>

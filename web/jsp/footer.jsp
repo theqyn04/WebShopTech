@@ -55,8 +55,8 @@
             </div>
         </footer>
 
-        <!-- Admin Link -->
-        <a href="admin/dashboard.html" class="admin-link" title="Admin Dashboard">
+        
+        <a href="LoginURL" class="admin-link" title="Admin Dashboard">
             <i class="fas fa-user-shield"></i>
         </a>
     </body>

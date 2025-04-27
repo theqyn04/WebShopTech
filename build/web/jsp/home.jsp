@@ -28,7 +28,7 @@
                 </div>
                 <div class="product-info">
                     <h3 class="product-title"><%=phone.getPhone_name()%></h3>
-                    <p class="product-category">Máy tính xách tay</p>
+                    <p class="product-category">Điện thoại</p>
                     <p class="product-price"><%=phone.getPrice()%>VND</p>
                     <div class="product-actions">
                         <a href="CartURL?service=add2cart&pid=<%=phone.getPhone_id()%>" class="add-to-cart btn btn-primary btn-block mt-auto">Thêm vào giỏ</a>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="product-info">
                     <h3 class="product-title"><%=phone.getPhone_name()%></h3>
-                    <p class="product-category">Máy tính xách tay</p>
+                    <p class="product-category">Điện thoại</p>
                     <p class="product-price"><%=phone.getPrice()%>VND</p>
                     <div class="product-actions">
                         <a href="CartURL?service=add2cart&pid=<%=phone.getPhone_id()%>" class="add-to-cart btn btn-primary btn-block mt-auto">Thêm vào giỏ</a>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="product-info">
                     <h3 class="product-title"><%=phone.getPhone_name()%></h3>
-                    <p class="product-category">Máy tính xách tay</p>
+                    <p class="product-category">Điện thoại</p>
                     <p class="product-price"><%=phone.getPrice()%>VND</p>
                     <div class="product-actions">
                         <a href="CartURL?service=add2cart&pid=<%=phone.getPhone_id()%>" class="add-to-cart btn btn-primary btn-block mt-auto">Thêm vào giỏ</a>
