@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tất cả sản phẩm | TechStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* (Reuse styles from index.html) */
+        
+        .products-container {
+            display: flex;
+            padding: 0 5%;
+            margin-bottom: 3rem;
+        }
+        
+        .sidebar {
+            width: 250px;
+            margin-right: 2rem;
+        }
+        
+        .filter-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .filter-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-options {
+            list-style: none;
+        }
+        
+        .filter-options li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .filter-options li a {
+            color: #7f8c8d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .filter-options li a:hover {
+            color: var(--primary);
+        }
+        
+        .price-range {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .price-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .price-inputs input {
+            width: 45%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .products-grid {
+            flex: 1;
+        }
+        
+        .sort-options {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sort-options select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination a {
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Same as index.html) -->
+    
+    <!-- Products Section -->
+    <h2 class="section-title">Tất cả sản phẩm</h2>
+    <div class="products-container">
+        <div class="sidebar">
+            <div class="filter-section">
+                <h3 class="filter-title">Danh mục <i class="fas fa-chevron-down"></i></h3>
+                <ul class="filter-options">
+                    <li><a href="#">Tất cả danh mục</a></li>
+                    <li><a href="categories.html?category=C001">Điện thoại</a></li>
+                    <li><a href="categories.html?category=C002">Máy tính</a></li>
+                    <li><a href="categories.html?category=C003">Phụ kiện</a></li>
+                    <li><a href="categories.html?category=C004">Đồ gia dụng</a></li>
+                    <li><a href="categories.html?category=C005">Thời trang</a></li>
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h3 class="filter-title">Giá <i class="fas fa-chevron-down"></i></h3>
+                <input type="range" class="price-range" min="0" max="50000000" step="1000000">
+                <div class="price-inputs">
+                    <input type="number" placeholder="Từ" min="0">
+                    <input type="number" placeholder="Đến" max="50000000">
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3 class="filter-title">Thương hiệu <i class="fas fa-chevron-down"></i></h3>
+                <ul class="filter-options">
+                    <li><a href="#">Apple</a></li>
+                    <li><a href="#">Samsung</a></li>
+                    <li><a href="#">Xiaomi</a></li>
+                    <li><a href="#">Oppo</a></li>
+                    <li><a href="#">Sony</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="products-grid">
+            <div class="sort-options">
+                <select>
+                    <option>Sắp xếp theo</option>
+                    <option>Giá thấp đến cao</option>
+                    <option>Giá cao đến thấp</option>
+                    <option>Tên A-Z</option>
+                    <option>Tên Z-A</option>
+                    <option>Mới nhất</option>
+                </select>
+            </div>
+            
+            <div class="products">
+                <!-- Product cards (same as index.html but more items) -->
+                <!-- Repeat product-card divs for all products -->
+            </div>
+            
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer (Same as index.html) -->
+</body>
+</html>
