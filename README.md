@@ -15,6 +15,8 @@
 * This project uses JSP servlet pages for the front-end and MySql database at the back-end
 * README.md - this file itself
 
+![Ảnh local](https://github.com/theqyn04/WebShopTech/blob/main/web/img/demo_img/img1.png)
+
 ### Connect me via: quyennguyen99000@gmail.com
 
 ### © 2025 theqyn04
