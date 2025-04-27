@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -99,8 +100,15 @@
                     <div class="login-box">
                         <h2>Phản hồi khách hàng</h2>
                         <p><b>Tôi là một khách hàng cũ</b></p>
+                        <%-- Hiển thị thông báo lỗi nếu có --%>
+                        <c:if test="${not empty message}">
+                            <div class="alert alert-danger" role="alert">
+                                <i class="fas fa-exclamation-circle"></i> ${message}
+                            </div>
+                        </c:if>
                         <form action="LoginURL" method="post">
                             <input type="hidden" name="service" value="loginCustomer">
+
                             <div class="form-group">
                                 <label for="username">Tài khoản</label>
                                 <input type="text" class="form-control" id="username" name="username" required>

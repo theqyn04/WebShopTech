@@ -1,10 +1,7 @@
 package controller;
 
 import dao.PhoneDAO;
-
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,84 +10,87 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.phone;
 
-
 @WebServlet(name = "CategoryController", urlPatterns = {"/CategoryURL"})
 public class CategoryController extends HttpServlet {
+
+    private static final int DEFAULT_RECORDS_PER_PAGE = 8;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PhoneDAO dao = new PhoneDAO();
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
+        try {
             String service = request.getParameter("service");
             if (service == null) {
                 service = "listPhone";
             }
+
+            // Xử lý phân trang
+            int page = 1;
+            int recordsPerPage = DEFAULT_RECORDS_PER_PAGE;
+
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+
             if (service.equals("listPhone")) {
-                //call model: get data
-                List<phone> list;
                 String id = request.getParameter("id");
-                list = dao.getPhone("select * from phone"
-                        + " where phone_type_id=" + id);
-//set data to view (jsp)
+                if (id == null || id.isEmpty()) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing category ID");
+                    return;
+                }
+
+                int totalRecords = dao.getTotalPhonesByType(Integer.parseInt(id));
+                int offset = (page - 1) * recordsPerPage;
+                List<phone> list = dao.getPhonesByTypeAndPage(Integer.parseInt(id), offset, recordsPerPage);
+                int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
                 request.setAttribute("phoneTypeData", list);
-                // select view (jsp)
-                RequestDispatcher dispath
-                        = request.getRequestDispatcher("/jsp/phoneType.jsp");
-                //run (view)
-                dispath.forward(request, response);
-            }
-            if (service.equals("listAllPhone")) {
-                List<phone> list = dao.getPhone("select * from phone");
+                request.setAttribute("totalProducts", totalRecords);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("recordsPerPage", recordsPerPage);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("categoryId", id);
+                request.setAttribute("service", service); // Thêm service vào request
+
+                request.getRequestDispatcher("/jsp/phoneType.jsp").forward(request, response);
+            } else if (service.equals("listAllPhone")) {
+                int totalRecords = dao.getTotalPhones();
+                int offset = (page - 1) * recordsPerPage;
+                List<phone> list = dao.getAllPhonesByPage(offset, recordsPerPage);
+                int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
                 request.setAttribute("phoneTypeData", list);
-                // select view (jsp)
-                RequestDispatcher dispath
-                        = request.getRequestDispatcher("/jsp/phoneType.jsp");
-                //run (view)
-                dispath.forward(request, response);
+                request.setAttribute("totalProducts", totalRecords);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("recordsPerPage", recordsPerPage);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("service", service); // Thêm service vào request
+
+                request.getRequestDispatcher("/jsp/phoneType.jsp").forward(request, response);
             }
-            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Category Controller";
+    }
 }

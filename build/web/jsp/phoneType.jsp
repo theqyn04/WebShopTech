@@ -8,33 +8,56 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
+            /* Các style hiện tại giữ nguyên */
+
+            /* Thêm style cho phân trang */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 2rem;
+            }
+
+            .page-item {
+                margin: 0 0.3rem;
+            }
+
+            .page-link {
+                color: var(--primary);
+                border: 1px solid #dee2e6;
+                padding: 0.5rem 0.9rem;
+                border-radius: 5px;
+                transition: all 0.3s;
+            }
+
+            .page-link:hover {
+                background-color: var(--primary);
+                color: white;
+                border-color: var(--primary);
+            }
+
+            .page-item.active .page-link {
+                background-color: var(--primary);
+                border-color: var(--primary);
+                color: white;
+            }
+
+            .page-item.disabled .page-link {
+                color: #6c757d;
+                pointer-events: none;
+                background-color: #fff;
+                border-color: #dee2e6;
+            }
             .products-container {
                 padding: 2rem 0;
-            }
-
-            .section-title {
-                text-align: center;
-                margin-bottom: 2rem;
-                color: var(--secondary);
-                position: relative;
-                padding-bottom: 0.5rem;
-            }
-
-            .section-title::after {
-                content: '';
-                position: absolute;
-                left: 50%;
-                bottom: 0;
-                width: 80px;
-                height: 2px;
-                background-color: var(--primary);
-                transform: translateX(-50%);
+                max-width: 1200px; /* Giới hạn độ rộng tối đa */
+                margin: 0 auto; /* Căn giữa */
             }
 
             .products-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 2rem;
+                grid-template-columns: repeat(4, 1fr); /* 4 cột bằng nhau */
+                gap: 1.5rem; /* Khoảng cách giữa các sản phẩm */
+                padding: 0 1rem; /* Thêm padding hai bên */
             }
 
             .product-card {
@@ -45,11 +68,7 @@
                 transition: transform 0.3s, box-shadow 0.3s;
                 display: flex;
                 flex-direction: column;
-            }
-
-            .product-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+                height: 100%; /* Đảm bảo tất cả card cùng chiều cao */
             }
 
             .product-img {
@@ -62,10 +81,6 @@
                 height: 100%;
                 object-fit: cover;
                 transition: transform 0.5s;
-            }
-
-            .product-card:hover .product-img img {
-                transform: scale(1.1);
             }
 
             .product-info {
@@ -92,57 +107,25 @@
             .product-actions {
                 display: flex;
                 gap: 0.8rem;
-                margin-top: auto;
+                margin-top: auto; /* Đẩy nút xuống dưới cùng */
             }
 
-            .add-to-cart {
-                background-color: var(--primary);
-                color: white;
-                border: none;
-                padding: 0.6rem 1rem;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                text-align: center;
-                text-decoration: none;
-                font-size: 0.9rem;
-                flex: 1;
-            }
-
-            .add-to-cart:hover {
-                background-color: #2980b9;
-            }
-
-            .view-details {
-                background-color: transparent;
-                color: var(--primary);
-                border: 1px solid var(--primary);
-                padding: 0.6rem 1rem;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.3s;
-                text-align: center;
-                text-decoration: none;
-                font-size: 0.9rem;
-                flex: 1;
-            }
-
-            .view-details:hover {
-                background-color: var(--primary);
-                color: white;
-            }
-
-            .filter-section {
-                margin-bottom: 2rem;
-                background-color: white;
-                padding: 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            /* Responsive cho các kích thước màn hình nhỏ hơn */
+            @media (max-width: 1024px) {
+                .products-grid {
+                    grid-template-columns: repeat(3, 1fr); /* 3 cột trên tablet */
+                }
             }
 
             @media (max-width: 768px) {
                 .products-grid {
-                    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                    grid-template-columns: repeat(2, 1fr); /* 2 cột trên mobile */
+                }
+            }
+
+            @media (max-width: 480px) {
+                .products-grid {
+                    grid-template-columns: 1fr; /* 1 cột trên mobile nhỏ */
                 }
 
                 .product-actions {
@@ -158,10 +141,13 @@
         <div class="container products-container">
             <h2 class="section-title">Danh sách sản phẩm</h2>
 
-            
-
             <% // get data from servlet
                 List<phone> list = (List<phone>)request.getAttribute("phoneTypeData");            
+                int totalProducts = (int)request.getAttribute("totalProducts");
+                int currentPage = (int)request.getAttribute("currentPage");
+                int recordsPerPage = (int)request.getAttribute("recordsPerPage");
+                int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
+                
                 if (list != null && !list.isEmpty()) {
             %>
             <div class="products-grid">
@@ -187,6 +173,59 @@
                 </div>
                 <% } %>
             </div>
+
+            <!-- Phân trang -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <% if (currentPage > 1) { %>
+                    <li class="page-item">
+                        <a class="page-link" 
+                           href="CategoryURL?service=${service}<%= request.getParameter("id") != null ? "&id=" + request.getParameter("id") : "" %>&page=<%=currentPage-1%>" 
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <% } else { %>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <% } %>
+
+                    <% for (int i = 1; i <= totalPages; i++) { %>
+                    <% if (i == currentPage) { %>
+                    <li class="page-item active">
+                        <a class="page-link" href="#"><%=i%></a>
+                    </li>
+                    <% } else { %>
+                    <li class="page-item">
+                        <a class="page-link" 
+                           href="CategoryURL?service=${service}<%= request.getParameter("id") != null ? "&id=" + request.getParameter("id") : "" %>&page=<%=i%>">
+                            <%=i%>
+                        </a>
+                    </li>
+                    <% } %>
+                    <% } %>
+
+                    <% if (currentPage < totalPages) { %>
+                    <li class="page-item">
+                        <a class="page-link" 
+                           href="CategoryURL?service=${service}<%= request.getParameter("id") != null ? "&id=" + request.getParameter("id") : "" %>&page=<%=currentPage+1%>" 
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <% } else { %>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <% } %>
+                </ul>
+            </nav>
+
             <% } else { %>
             <div class="alert alert-info">
                 <p>Không tìm thấy sản phẩm nào phù hợp.</p>

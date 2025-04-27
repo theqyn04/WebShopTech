@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class DBConnect {
 
-    Connection conn = null;  
+    Connection conn = null;
 
     public DBConnect(String URL, String userName, String password) {
         try {
@@ -44,4 +44,19 @@ public class DBConnect {
         return rs;
     }
 
+    public Connection getConnection() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                // Tạo kết nối mới nếu chưa có hoặc đã đóng
+                conn = DriverManager.getConnection(
+                        "jdbc:sqlserver://localhost:1433;databaseName=tech_store",
+                        "sa",
+                        "sa123");
+            }
+            return conn;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 }

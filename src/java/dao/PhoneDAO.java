@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-
+import java.sql.Connection;
 
 public class PhoneDAO extends DBConnect {
 
@@ -157,8 +157,6 @@ public class PhoneDAO extends DBConnect {
         }
         return pho;
     }
-    
-
 
     private double calculateTotalAmount(List<cart> cartItems) {
         double total = 0;
@@ -174,18 +172,114 @@ public class PhoneDAO extends DBConnect {
 
             String sql = "INSERT INTO orders (customer_id, order_date, total_amount, status) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, customerId); 
+            ps.setInt(1, customerId);
             ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
             ps.setDouble(3, totalAmount);
             ps.setString(4, "processing");
             ps.executeUpdate();
 
-            
         } catch (SQLException e) {
             e.printStackTrace();
-            
+
         }
     }
-   
+
+    /**
+     * Lấy tổng số điện thoại trong hệ thống
+     */
+    public int getTotalPhones() {
+        String query = "SELECT COUNT(*) FROM phone";
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PhoneDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+
+    /**
+     * Lấy tổng số điện thoại theo loại
+     */
+    public int getTotalPhonesByType(int typeId) {
+        String query = "SELECT COUNT(*) FROM phone WHERE phone_type_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, typeId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PhoneDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return 0;
+    }
+
+    /**
+     * Lấy danh sách điện thoại theo trang (phân trang)
+     */
+    public List<phone> getAllPhonesByPage(int offset, int limit) {
+        List<phone> list = new ArrayList<>();
+        String query = "SELECT * FROM phone ORDER BY phone_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, offset);
+            pstmt.setInt(2, limit);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    phone pho = new phone(
+                            rs.getInt("phone_id"),
+                            rs.getString("phone_name"),
+                            rs.getInt("phone_type_id"),
+                            rs.getDouble("price"),
+                            rs.getInt("stock_quantity"),
+                            rs.getString("description"),
+                            rs.getString("imageURL")
+                    );
+                    list.add(pho);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PhoneDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
+    /**
+     * Lấy danh sách điện thoại theo loại và trang
+     */
+    public List<phone> getPhonesByTypeAndPage(int typeId, int offset, int limit) {
+        List<phone> list = new ArrayList<>();
+        String query = "SELECT * FROM phone WHERE phone_type_id = ? ORDER BY phone_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, typeId);
+            pstmt.setInt(2, offset);
+            pstmt.setInt(3, limit);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    phone pho = new phone(
+                            rs.getInt("phone_id"),
+                            rs.getString("phone_name"),
+                            rs.getInt("phone_type_id"),
+                            rs.getDouble("price"),
+                            rs.getInt("stock_quantity"),
+                            rs.getString("description"),
+                            rs.getString("imageURL")
+                    );
+                    list.add(pho);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(PhoneDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
 
 }

@@ -154,7 +154,10 @@
 
                     <div class="form-group">
                         <label for="phone_number">Điện thoại</label>
-                        <input type="text" id="phone_number" name="phone_number" value="<%= request.getParameter("phone_number") != null ? request.getParameter("phone_number") : "" %>" required>
+                        <input type="text" id="phone_number" name="phone_number" 
+                               value="<%= request.getParameter("phone_number") != null ? request.getParameter("phone_number") : "" %>" 
+                               placeholder="Ví dụ: 0987665554" 
+                               required>
                     </div>
 
                     <div class="form-group">
