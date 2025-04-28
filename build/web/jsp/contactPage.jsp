@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Liên hệ - TechStore</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <style>
             .contact-container {
                 background-color: white;

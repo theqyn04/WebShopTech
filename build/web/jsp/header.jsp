@@ -31,19 +31,25 @@
                             <li><a href="CategoryURL?service=listPhone&id=5">Sony</a></li>
                         </ul>
                     </li>
-                    <li><a href="CartURL?service=showCart" class="cart-icon">
+                    <li>
+                        <a href="CartURL?service=showCart" class="cart-icon">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">3</span>
+                            <c:if test="${not empty sessionScope.cartCount}">
+                                <span class="cart-count">${sessionScope.cartCount}</span>
+                            </c:if>
+                            <c:if test="${empty sessionScope.cartCount}">
+                                <span class="cart-count">0</span>
+                            </c:if>
                         </a>
                     </li>
                     <c:if test="${empty sessionScope.userName}">
                         <li><a href="LoginURL?service=loginCustomer">Đăng nhập</a></li>
                         <li><a href="LoginURL?service=registerCustomer">Đăng kí</a></li>
-                    </c:if>
-                    <c:if test="${not empty sessionScope.userName}">
+                        </c:if>
+                        <c:if test="${not empty sessionScope.userName}">
                         <li><a href="AccountURL?service=viewAccount&id=${sessionScope.userId}">Tài khoản của tôi</a></li>
                         <li><a href="LogoutURL">Đăng xuất</a></li>
-                    </c:if>
+                        </c:if>
                 </ul>
             </nav>
         </header>

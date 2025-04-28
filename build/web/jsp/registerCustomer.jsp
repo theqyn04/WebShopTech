@@ -5,9 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Đăng ký tài khoản - TechStore</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/homeStyle.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
             .register-container {
                 max-width: 600px;

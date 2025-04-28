@@ -73,20 +73,30 @@ body {
     align-items: center;
 }
 
-.quantity-control button {
+.quantity-btn {
     width: 30px;
     height: 30px;
-    background-color: var(--light);
-    border: none;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.quantity-control input {
+.quantity-btn:hover {
+    background-color: #e9ecef;
+}
+
+.quantity-input {
     width: 50px;
     height: 30px;
     text-align: center;
-    margin: 0 0.5rem;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 5px;
 }
 
 .remove-item {

@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Câu hỏi thường gặp - TechStore</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/homeStyle.css" rel="stylesheet">
         <style>
             .faq-container {

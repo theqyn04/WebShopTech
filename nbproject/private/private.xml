@@ -4,22 +4,22 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/employeeDashboard.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/complaintHandlingPage.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/phoneType.jsp</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/dao/StoreReventoryDAO.java</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/dao/OrderDAO.java</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/loginCustomer.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/thankYou.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/account.jsp</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/dao/DBConnect.java</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/dao/PhoneDAO.java</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/loginCustomer.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/showCart.jsp</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/css/footerStyle.css</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/controller/LogoutController.java</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/home.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/contactPage.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/faqsPage.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/phoneDetail.jsp</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/css/headerStyle.css</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/refundPolicyPage.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/home.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/registerCustomer.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/header.jsp</file>
-            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/src/java/controller/CategoryController.java</file>
+            <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/needToLogin.jsp</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/css/cartStyle.css</file>
             <file>file:/C:/Users/The%20Quyen/Desktop/FPT/SE4/WebPRJ301/WebShopTech/web/jsp/footer.jsp</file>
         </group>

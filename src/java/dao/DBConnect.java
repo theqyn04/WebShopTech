@@ -59,4 +59,35 @@ public class DBConnect {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        // Tạo đối tượng DBConnect
+        DBConnect dbConnect = new DBConnect();
+
+        // Kiểm tra kết nối
+        if (dbConnect.conn != null) {
+            System.out.println("Kết nối CSDL thành công!");
+
+            // Test thử truy vấn đơn giản
+            try {
+                String testQuery = "SELECT 1 AS test_value";
+                ResultSet rs = dbConnect.getData(testQuery);
+
+                if (rs.next()) {
+                    System.out.println("Test query executed successfully. Result: " + rs.getInt("test_value"));
+                } else {
+                    System.out.println("Test query executed but no results returned.");
+                }
+
+                // Đóng kết nối sau khi test
+                dbConnect.conn.close();
+                System.out.println("Đã đóng kết nối CSDL.");
+            } catch (SQLException ex) {
+                System.err.println("Lỗi khi thực hiện test query:");
+                ex.printStackTrace();
+            }
+        } else {
+            System.err.println("Kết nối CSDL thất bại!");
+        }
+    }
 }

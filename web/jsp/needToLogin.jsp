@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Required - TechStore</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/homeStyle.css" rel="stylesheet">
         <style>
             .login-required-container {

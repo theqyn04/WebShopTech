@@ -53,11 +53,13 @@
                                 <td><%=String.format("%,d", (int)phone.getPrice())%>₫</td>
                                 <td>
                                     <div class="quantity-control">
-                                        <form action="CartURL" method="post" style="display: flex;">
+                                        <form action="CartURL" method="post" style="display: flex; align-items: center; gap: 0.5rem;">
                                             <input type="hidden" name="service" value="updateQuantity">
                                             <input type="hidden" name="pid" value="<%=phone.getPhone_id()%>">
-                                           
-                                            <input type="number" name="quantity" value="<%=phone.getQuantity()%>" min="1" readonly>
+
+                                            <button type="submit" name="action" value="decrease" class="quantity-btn">-</button>
+                                            <input type="number" name="quantity" value="<%=phone.getQuantity()%>" min="1" class="quantity-input" readonly>
+                                            <button type="submit" name="action" value="increase" class="quantity-btn">+</button>
                                         </form>
                                     </div>
                                 </td>
@@ -113,5 +115,28 @@
         </div>
 
         <%@include file="footer.jsp" %>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Xử lý sự kiện click cho các nút tăng/giảm
+                document.querySelectorAll('.quantity-btn').forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const form = this.closest('form');
+                        const input = form.querySelector('input[name="quantity"]');
+                        let quantity = parseInt(input.value);
+
+                        if (this.value === 'increase') {
+                            input.value = quantity + 1;
+                        } else if (this.value === 'decrease' && quantity > 1) {
+                            input.value = quantity - 1;
+                        }
+
+                        // Gửi form
+                        form.submit();
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
